@@ -39,11 +39,12 @@ EXTRA_DEPS +=
 # BPF-prog kern and userspace shares struct via header file:
 KERN_USER_H ?= $(wildcard common_kern_user.h)
 
+KVER := $(shell uname -r)
 CFLAGS ?= -I$(LIBBPF_DIR)/build/usr/include/ -g
-CFLAGS += -I../headers/ -I/usr/src/linux-headers-5.4.0-47-generic/arch/x86/include/generated/uapi
+CFLAGS += -I../headers/ -I/usr/src/linux-headers-$(KVER)/arch/x86/include/generated/uapi
 LDFLAGS ?= -L$(LIBBPF_DIR)
 
-BPF_CFLAGS ?= -I$(LIBBPF_DIR)/build/usr/include/ -I../headers/ -I/usr/src/linux-headers-5.4.0-47-generic/arch/x86/include/generated/uapi -I/usr/src/linux-headers-5.4.0-47/arch/x86/include/uapi -I/usr/src/linux-headers-5.4.0-47/include -I/usr/src/linux-headers-5.4.0-47/arch/x86/include
+BPF_CFLAGS ?= -I$(LIBBPF_DIR)/build/usr/include/ -I../headers/ -I/usr/src/linux-headers-$(KVER)/include -I/usr/src/linux-headers-$(KVER)/arch/x86/include/generated/uapi -I/usr/src/linux-headers-$(KVER)/arch/x86/include/uapi -I/usr/src/linux-headers-$(KVER)/arch/x86/include
 
 LIBS = -l:libbpf.a -lelf $(USER_LIBS)
 
