@@ -40,10 +40,10 @@ EXTRA_DEPS +=
 KERN_USER_H ?= $(wildcard common_kern_user.h)
 
 CFLAGS ?= -I$(LIBBPF_DIR)/build/usr/include/ -g
-CFLAGS += -I../headers/
+CFLAGS += -I../headers/ -I/usr/src/linux-headers-5.4.0-47-generic/arch/x86/include/generated/uapi
 LDFLAGS ?= -L$(LIBBPF_DIR)
 
-BPF_CFLAGS ?= -I$(LIBBPF_DIR)/build/usr/include/ -I../headers/
+BPF_CFLAGS ?= -I$(LIBBPF_DIR)/build/usr/include/ -I../headers/ -I/usr/src/linux-headers-5.4.0-47-generic/arch/x86/include/generated/uapi -I/usr/src/linux-headers-5.4.0-47/arch/x86/include/uapi -I/usr/src/linux-headers-5.4.0-47/include -I/usr/src/linux-headers-5.4.0-47/arch/x86/include
 
 LIBS = -l:libbpf.a -lelf $(USER_LIBS)
 
